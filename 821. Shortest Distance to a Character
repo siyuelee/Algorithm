@@ -1,0 +1,25 @@
+## 思路
+Iterate twice - from the left and from the right. We will remember the index of the last char c that we've seen and append the distance to res[]. While interating from right to left, we will calc the distance agian and compare it with the one in res. Smaller ones would be the final results.
+
+## Code
+```Python
+class Solution(object):
+    def shortestToChar(self, s, c):
+        prev = float('-inf')
+        res = []
+        for i, x in enumerate(s):
+            if x == c:
+                prev = i
+            res.append(i - prev)
+            
+        prev = float('inf')
+        for i in range(len(s)-1, -1, -1):
+            if s[i] == c:
+                prev = i
+            res[i] = min(res[i], prev - i)
+            
+        return res
+```
+## 复杂度分析
+时间复杂度O（n）
+空间复杂度O（n）
